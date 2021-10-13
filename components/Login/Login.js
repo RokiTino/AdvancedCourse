@@ -1,15 +1,12 @@
 import React,{ useState } from 'react'
-import { View, Text,SafeAreaView,TouchableOpacity,ScrollView } from 'react-native'
+import { View, Text,SafeAreaView,TouchableOpacity,ScrollView,TextInput } from 'react-native'
 import tw from 'tailwind-react-native-classnames';
 import {useNavigation} from '@react-navigation/native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Register from '../Register/Register';
 import HomeScreen from '../HomeScreen';
-import { TextInput } from 'react-native-gesture-handler';
-
-const Login = () => {
-    const navigation = useNavigation();
+const Login = ({navigation}) => {
     const[username,setUserName] = useState('');
     const[password,setPassword] = useState('');
     
@@ -18,7 +15,7 @@ const Login = () => {
             alert('Enter the Username and the password')
         }
         else {
-            navigation.navigate('HomeScreen','123')
+            navigation.navigate('Home', { screen: 'HomeScreen', params:{user:{username,password}} });
         }
     }
     const Stack = createNativeStackNavigator();
@@ -44,7 +41,7 @@ const Login = () => {
             </TouchableOpacity>
             </View>
             <View style={tw`mx-10 mt-5`}>
-                <TouchableOpacity onPress={()=> navigation.navigate('Register','123')}>
+                <TouchableOpacity  onPress={() => navigation.navigate('RegisterScreen', { screen: 'Register' })}>
                 <Text>Not a member ? Register Here</Text>
                 </TouchableOpacity>
             </View>
